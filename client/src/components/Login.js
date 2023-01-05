@@ -3,8 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 
-
-function Login () {
+function Login ( { onLogin } ) {
 
     const formStyle = {
         backgroundColor: 'rgb(30, 31, 31)',
@@ -38,7 +37,7 @@ function Login () {
         })
         .then((r) => {
             if(r.ok) {
-                r.json().then(r =>console.log(r))
+                r.json().then(user => onLogin(user))
             } else {
                 r.json(). then((data) => setError(data.error.login))
             }
@@ -61,9 +60,7 @@ function Login () {
               <Button variant="dark" type="submit">
                 Submit
               </Button>
-              <br></br>
-             <br></br>
-             <p style={{ color: "lightcoral", fontSize: "12px"}}>
+             <p style={{ color: "lightcoral", fontSize: "12px", padding: '10px'}}>
                 {error}
              </p>
             </Form>

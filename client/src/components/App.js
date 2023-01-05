@@ -8,8 +8,9 @@ import Login from './Login';
 
 function App() {
 
+  const [currentUser, setCurrentUser] = useState('');
   const [products, setProducts] = useState([]);
-
+  
   useEffect(() => {
     fetch('/products')
     .then(r => {
@@ -19,13 +20,17 @@ function App() {
     })
   },[]);
 
+  function handleLogin(user) {
+    setCurrentUser(user)
+  }
+
   return (
     <div >
       <NavBar/>
         <Routes> 
           <Route path='/' element={<Products products={products}/>} />
           <Route path='/signup' element={ <SignUp/>}/>
-          <Route path='/login' element={ <Login />}/>
+          <Route path='/login' element={ <Login onLogin={handleLogin}/>}/>
         </Routes>
     </div>
   );
