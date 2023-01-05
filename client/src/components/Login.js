@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
@@ -9,7 +10,6 @@ function Login ( { onLogin } ) {
         backgroundColor: 'rgb(30, 31, 31)',
         width: '40%',
         color: 'white',
-        padding: '10px',
         borderRadius: '20px'
     };
 
@@ -26,6 +26,8 @@ function Login ( { onLogin } ) {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
+    const navigate = useNavigate()
+
    function handleSubmit(e) {
         e.preventDefault()
         fetch('/login', {
@@ -37,16 +39,19 @@ function Login ( { onLogin } ) {
         })
         .then((r) => {
             if(r.ok) {
-                r.json().then(user => onLogin(user))
+                r.json().then(user => {
+                    onLogin(user)
+                    navigate('/')
+                })
             } else {
-                r.json(). then((data) => setError(data.error.login))
+                r.json().then((data) => setError(data.error.login))
             }
         })
     };
 
 
     return (
-        <div  className="row h-100 justify-content-center align-items-center" style={{paddingBottom: '10px', fontFamily: 'andale mono, monospace'}}>
+        <div  className="row h-100 justify-content-center align-items-center" style={{ fontFamily: 'andale mono, monospace'}}>
             <h1 style={headerStyle}>LOG IN</h1>
             <Form style={formStyle} onSubmit={handleSubmit}>
              <Form.Group className="mb-3" controlId="formBasicUsername">

@@ -21,7 +21,7 @@ function Header() {
 
     return(
         <div>
-            <h1 style={headerStyle}>LOTUS LILY</h1>
+            <h1 style={headerStyle}>LOTUS LUCY</h1>
             <h2 style={subHeader}>Flowers can say it better</h2>
         </div>
     );
