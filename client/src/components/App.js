@@ -1,7 +1,8 @@
 import React , { useEffect, useState }from 'react';
+import { Routes, Route } from 'react-router-dom';
 import NavBar from './NavBar';
 import Products from './Products';
-import Header from './Header';
+import SignUp from './SignUp';
 
 
 function App() {
@@ -18,10 +19,12 @@ function App() {
   },[]);
 
   return (
-    <div>
+    <div >
       <NavBar/>
-      <Header/>
-      <Products products={products}/>
+        <Routes> 
+          <Route path='/' element={<Products products={products}/>} />
+          <Route path='/signup' element={ <SignUp/ >}/>
+        </Routes>
     </div>
   );
 };

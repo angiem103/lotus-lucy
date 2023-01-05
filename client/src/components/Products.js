@@ -1,5 +1,6 @@
 import React from 'react';
 import ProductCard from './ProductCard';
+import Header from './Header';
 import Row from 'react-bootstrap/Row';
 
 
@@ -10,11 +11,14 @@ function Products( {products} ) {
     });
 
     return (
+        <div>
+        <Header />
         <div style={{ }}>
             <Row xs={3} md={3} className="g-4">
                 {renderProducts}
             </Row>
         </div>
+       </div>
     );
 }
 
