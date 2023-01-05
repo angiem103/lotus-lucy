@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   
+  post "/login", to: "sessions#create"
+
+
   resources :customers
   resources :orders
   resources :order_details

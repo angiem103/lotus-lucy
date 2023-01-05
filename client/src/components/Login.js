@@ -25,30 +25,25 @@ function Login () {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [errors, setErrors] = useState([]);
+    const [error, setError] = useState('');
 
    function handleSubmit(e) {
         e.preventDefault()
-        const user = {
-            username: username,
-            password: password
-        }
-
-        fetch(`/customers`, {
+        fetch('/login', {
             method: "POST",
             headers: {
-                "Content-Type" : "application/json"
+                'Content-Type' : "application/json"
             },
-            body: JSON.stringify(user)
+            body:JSON.stringify({username, password})
         })
-        .then(r => {
-            if(r.ok){
-                r.json(console.log(user))
+        .then((r) => {
+            if(r.ok) {
+                r.json().then(r =>console.log(r))
             } else {
-                r.json().then((err) => setErrors(err.errors))
+                r.json(). then((data) => setError(data.error.login))
             }
         })
-    }
+    };
 
 
     return (
@@ -56,20 +51,21 @@ function Login () {
             <h1 style={headerStyle}>LOG IN</h1>
             <Form style={formStyle} onSubmit={handleSubmit}>
              <Form.Group className="mb-3" controlId="formBasicUsername">
-                <Form.Label>Username</Form.Label>
-                <Form.Control type="username" placeholder="Enter Username" onChange={(e) => setUsername(e.target.value)} />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
+                 <Form.Label>Username</Form.Label>
+                 <Form.Control type="username" placeholder="Enter Username" onChange={(e) => setUsername(e.target.value)} />
+              </Form.Group>
+             <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>Password</Form.Label>
                 <Form.Control type="password" placeholder="Enter Password" onChange={(e) => setPassword(e.target.value)} />
-            </Form.Group>
-            <Button variant="dark" type="submit">
+             </Form.Group>
+              <Button variant="dark" type="submit">
                 Submit
-             </Button>
+              </Button>
+              <br></br>
              <br></br>
-             <ul style={{ color: "lightcoral", fontSize: "12px"}}>
-                {errors.map((error) => <li>{error}</li>)}
-             </ul>
+             <p style={{ color: "lightcoral", fontSize: "12px"}}>
+                {error}
+             </p>
             </Form>
         </div>
       );
