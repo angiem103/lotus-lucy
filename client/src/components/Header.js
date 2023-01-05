@@ -6,13 +6,25 @@ function Header() {
         color: 'white',
         height: '150px',
         textAlign: 'center',
-        padding: '55px',
-        fontFamily: 'baskervile, serif'
+        paddingTop: '50px',
+        fontFamily: 'andale mono, monospace',
+        fontSize: '60px',
+    };
+
+    const subHeader = {
+        color: 'white',
+        textAlign: 'center',
+        fontFamily: 'andale mono, monospace',
+        fontSize: '20px',
+        paddingBottom: '25px'
     }
 
     return(
-        <h1 style={headerStyle}>LOTUS LILY</h1>
-    )
-}
+        <div>
+            <h1 style={headerStyle}>LOTUS LILY</h1>
+            <h2 style={subHeader}>Flowers can say it better</h2>
+        </div>
+    );
+};
 
 export default Header;
