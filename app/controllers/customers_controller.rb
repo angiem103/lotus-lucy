@@ -10,7 +10,7 @@ class CustomersController < ApplicationController
     end
 
     def show
-        customer = Customer.find_by(id: params[:id])
+        customer = Customer.find(session[:customer_id])
         if customer
             render json: customer
         else
@@ -30,7 +30,7 @@ class CustomersController < ApplicationController
     private 
     
     def customer_params
-        params.permit(:name, :phone_number, :email, :address, :username, :password)
+        params.permit(:id, :name, :phone_number, :email, :address, :username, :password)
     end
 
 

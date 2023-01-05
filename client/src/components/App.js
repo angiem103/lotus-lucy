@@ -4,16 +4,26 @@ import NavBar from './NavBar';
 import Products from './Products';
 import SignUp from './SignUp';
 import Login from './Login';
+import MyOrders from './MyOrders';
 
 
 export const LoginContext = createContext()
 
 function App() {
 
-  const [currentUser, setCurrentUser] = useState('');
+  const [currentUser, setCurrentUser] = useState();
   const [products, setProducts] = useState([]);
   
-  console.log(currentUser)
+  useEffect(() => {
+    fetch('/auth')
+    .then(r => {
+      if(r.ok) {
+        r.json().then(user => {
+          setCurrentUser(user)
+        })
+      } 
+    })
+  }, []);
 
   useEffect(() => {
     fetch('/products')
@@ -36,6 +46,7 @@ function App() {
           <Route path='/' element={<Products products={products}/>} />
           <Route path='/signup' element={ <SignUp/>}/>
           <Route path='/login' element={ <Login onLogin={handleLogin}/>}/>
+          <Route path='/myorders' element= { <MyOrders />} />
         </Routes>
       </LoginContext.Provider>
     </div>

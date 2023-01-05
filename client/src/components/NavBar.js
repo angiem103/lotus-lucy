@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/esm/Button';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -13,7 +13,6 @@ function NavBar() {
 
     const {currentUser,setCurrentUser} = useContext(LoginContext); 
     const navigate = useNavigate()
-    console.log(currentUser)
 
     function handleLogout() {
         fetch('/logout', {method: "DELETE"})
