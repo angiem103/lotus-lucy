@@ -40,7 +40,7 @@ function App() {
 
   return (
     <div>
-      <LoginContext.Provider value={{currentUser,setCurrentUser}}>
+      <LoginContext.Provider value={{products,currentUser,setCurrentUser}}>
       <NavBar/>
         <Routes> 
           <Route path='/' element={<Products products={products}/>} />

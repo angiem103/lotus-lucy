@@ -3,4 +3,5 @@ class OrderSerializer < ActiveModel::Serializer
 
   belongs_to :customer
   has_many :products
+  has_many :order_details
 end

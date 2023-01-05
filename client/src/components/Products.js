@@ -13,7 +13,7 @@ function Products( {products} ) {
     return (
         <div>
         <Header />
-        <div style={{ }}>
+        <div>
             <Row xs={3} md={3} className="g-4">
                 {renderProducts}
             </Row>
