@@ -1,6 +1,7 @@
 import React , { useEffect, useState }from 'react';
 import NavBar from './NavBar';
 import Products from './Products';
+import Header from './Header';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
   return (
     <div>
       <NavBar/>
+      <Header/>
       <Products products={products}/>
     </div>
   );

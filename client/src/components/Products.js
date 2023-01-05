@@ -10,15 +10,11 @@ function Products( {products} ) {
     });
 
     return (
-
+        <div style={{ }}>
             <Row xs={3} md={3} className="g-4">
-
-
-                    {renderProducts}
-
-
+                {renderProducts}
             </Row>
-          
+        </div>
     );
 }
 
