@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 
 
 
-function SignUp () {
+function Login () {
 
     const formStyle = {
         backgroundColor: 'rgb(30, 31, 31)',
@@ -23,21 +23,13 @@ function SignUp () {
         fontSize: '50px',
     };
 
-    const [name, setName] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [email, setEmail] = useState('');
-    const [address, setAddress] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState([]);
 
    function handleSubmit(e) {
         e.preventDefault()
-        const customer = {
-            name: name,
-            phone_number: phoneNumber,
-            email: email,
-            address: address,
+        const user = {
             username: username,
             password: password
         }
@@ -47,11 +39,11 @@ function SignUp () {
             headers: {
                 "Content-Type" : "application/json"
             },
-            body: JSON.stringify(customer)
+            body: JSON.stringify(user)
         })
         .then(r => {
             if(r.ok){
-                r.json(console.log(customer))
+                r.json(console.log(user))
             } else {
                 r.json().then((err) => setErrors(err.errors))
             }
@@ -61,24 +53,8 @@ function SignUp () {
 
     return (
         <div  className="row h-100 justify-content-center align-items-center" style={{paddingBottom: '10px', fontFamily: 'andale mono, monospace'}}>
-            <h1 style={headerStyle}>SIGN UP</h1>
+            <h1 style={headerStyle}>LOG IN</h1>
             <Form style={formStyle} onSubmit={handleSubmit}>
-            <Form.Group className="mb-3" controlId="formBasicName">
-                <Form.Label>Name</Form.Label>
-                <Form.Control type="name" placeholder="Enter Name" onChange={(e) => setName(e.target.value)} />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPhoneNumber">
-                <Form.Label>Phone Number</Form.Label>
-                <Form.Control type="phone number" placeholder="Enter Phone Number"  onChange={(e) => setPhoneNumber(e.target.value)}/>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Email</Form.Label>
-                <Form.Control type="email" placeholder="Enter Email"onChange={(e) => setEmail(e.target.value)} />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicAddress">
-                <Form.Label>Address</Form.Label>
-                <Form.Control type="address" placeholder="Enter Address"onChange={(e) => setAddress(e.target.value)} />
-            </Form.Group>
              <Form.Group className="mb-3" controlId="formBasicUsername">
                 <Form.Label>Username</Form.Label>
                 <Form.Control type="username" placeholder="Enter Username" onChange={(e) => setUsername(e.target.value)} />
@@ -99,4 +75,4 @@ function SignUp () {
       );
 }
 
-export default SignUp;
+export default Login;

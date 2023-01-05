@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import NavBar from './NavBar';
 import Products from './Products';
 import SignUp from './SignUp';
+import Login from './Login';
 
 
 function App() {
@@ -23,7 +24,8 @@ function App() {
       <NavBar/>
         <Routes> 
           <Route path='/' element={<Products products={products}/>} />
-          <Route path='/signup' element={ <SignUp/ >}/>
+          <Route path='/signup' element={ <SignUp/>}/>
+          <Route path='/login' element={ <Login />}/>
         </Routes>
     </div>
   );
