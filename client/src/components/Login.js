@@ -8,7 +8,7 @@ function Login () {
 
     const formStyle = {
         backgroundColor: 'rgb(30, 31, 31)',
-        width: '50%',
+        width: '40%',
         color: 'white',
         padding: '10px',
         borderRadius: '20px'
