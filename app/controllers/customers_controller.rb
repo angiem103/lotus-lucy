@@ -3,7 +3,7 @@ class CustomersController < ApplicationController
     def index
         customers = Customer.all
         if customers
-        render json: customers, include: [ 'orders', 'orders.order_details'] 
+        render json: customers, include: [ 'orders', 'orders.order_details', 'orders.products'] 
         else
             render json: {error: "No Customers Found"}, status: :not_found
         end
@@ -12,7 +12,7 @@ class CustomersController < ApplicationController
     def show
         customer = Customer.find(session[:customer_id])
         if customer
-            render json: customer
+            render json: customer, include: [ 'orders', 'orders.order_details', 'orders.products'] 
         else
             render json: { error: "Customer Not Found" }, status: :not_found
         end

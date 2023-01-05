@@ -9,4 +9,13 @@ class OrdersController < ApplicationController
         end
     end
 
+    def show
+        order = Order.find_by(id: params[:id])
+        if order
+            render json: order
+        else
+            render json: { error: "No information found" }, status: :not_found
+        end
+    end
+
 end
