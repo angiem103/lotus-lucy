@@ -1,16 +1,56 @@
 import React, { useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { InfoContext } from './App';
+import { InfoContext, LoginContext } from './App';
 import CartItems from './CartItems';
 
 function Cart( {show, setShow} ) {
 
-    const {products,cartItems, setCartItems} = useContext(InfoContext);
+  const {currentUser} = useContext(LoginContext);
+  const {products, cartItems, setCartItems} = useContext(InfoContext);
 
-
-  const handleClose = () => setShow(false);
   const handleClearCart = () => setCartItems([]);
+
+  function handlePlacedOrder() {
+    setShow(false)
+
+    const today = new Date()
+    const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
+    const newOrder = {
+        customer_id: currentUser.id,
+        order_date: date,
+    }
+
+    console.log(newOrder)
+    fetch('/orders', {
+        method: 'POST',
+        headers: {
+            'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify(newOrder)
+    })
+    .then(r => r.json())
+    .then(ord => {      
+       cartItems.forEach((item) => {
+            const obj = {
+                oder_id: ord.id,
+                product_id: item.product_id,
+                quantity: item.quantity
+            }
+            console.log(obj)
+            fetch('/order_details', {
+            method: "POST",
+            headers: {
+                "Content-Type" : "applicatioin/json"
+            },
+            body:JSON.stringify(obj)
+            })
+            .then(r => r.json())
+            .then(r => console.log(r))
+}
+)})
+  }
 
   const modalStyling = {
     backgroundColor: 'rgb(30, 31, 31)',
@@ -18,20 +58,19 @@ function Cart( {show, setShow} ) {
     fontFamily: 'andale mono, monospace'
   };
 
-  const renderCartItems = cartItems.map((item) => <CartItems key={item.id} item={item}/>)
+  const renderCartItems = cartItems.map((item) => <CartItems item={item}/>)
   const cartCosts = cartItems.map((item) => {
     const product = products.find(product => product.id === item.product_id)
     return product.price * item.quantity
   })
   
   const cartTotal = cartCosts.reduce((prev, curr) => prev + curr, 0)
-  console.log(cartCosts)
-  console.log(cartTotal)
+
 
   return (
 
     <div >
-        <Modal show={show} onHide={handleClose} >
+        <Modal show={show} onHide={() => setShow(false)} >
         <Modal.Header closeButton style={modalStyling} >
             <Modal.Title>My Cart</Modal.Title>
         </Modal.Header>
@@ -43,7 +82,7 @@ function Cart( {show, setShow} ) {
             <Button variant="outline-light" onClick={handleClearCart}>
             Clear Cart
             </Button>
-            <Button variant="outline-light" onClick={handleClose}>
+            <Button variant="outline-light" onClick={handlePlacedOrder}>
             Place Order
             </Button>
         </Modal.Footer>
