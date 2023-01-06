@@ -5,6 +5,8 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/esm/Button';
 import { useNavigate } from 'react-router-dom';
+import { FiShoppingCart } from "react-icons/fi";
+
 
 
 
@@ -37,11 +39,13 @@ function NavBar() {
                 <Nav Nav className="me-auto">
                     <Nav.Link href="/myorders" style={{width: '100px'}}>My Orders</Nav.Link>
                     <Button onClick={handleLogout} variant='dark'>Logout</Button>
+                    <Nav.Link style={{color: 'white'}}> <FiShoppingCart /></Nav.Link>
                </Nav>
              : 
                 <Nav Nav className="me-auto">
                     <Nav.Link href="/login">Login</Nav.Link>
-                    <Nav.Link href="/signup" style={{width: '80px'}}>Sign Up</Nav.Link>
+                    <Nav.Link href="/signup" style={{width: '75px'}}>Sign Up</Nav.Link>
+                    <Nav.Link style={{color: 'white'}}> <FiShoppingCart /></Nav.Link>
                 </Nav>
             }
         </Container>
