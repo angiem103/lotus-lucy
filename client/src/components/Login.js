@@ -10,7 +10,8 @@ function Login ( { onLogin } ) {
         backgroundColor: 'rgb(30, 31, 31)',
         width: '40%',
         color: 'white',
-        borderRadius: '20px'
+        borderRadius: '12px',
+        padding:'20px'
     };
 
     const headerStyle = {
@@ -63,11 +64,12 @@ function Login ( { onLogin } ) {
                 <Form.Control type="password" placeholder="Enter Password" onChange={(e) => setPassword(e.target.value)} />
              </Form.Group>
               <Button variant="dark" type="submit">
-                Submit
+                Log In
               </Button>
-             <p style={{ color: "lightcoral", fontSize: "12px", padding: '10px'}}>
-                {error}
-             </p>
+             { error ? 
+                <p style={{ color: "lightcoral", fontSize: "12px", padding: '10px'}}>
+                    {error}
+                 </p> : undefined}
             </Form>
         </div>
       );

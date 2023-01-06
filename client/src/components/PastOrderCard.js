@@ -1,5 +1,4 @@
-import React, {useContext} from 'react';
-import { LoginContext } from './App';
+import React from 'react';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Col from 'react-bootstrap/Col';
@@ -13,11 +12,10 @@ function PastOrderCard( {order} ) {
         fontSize: '20px',
     };
 
-    
  
     const renderImg = order.products.map((product) => {
         return (
-            <Carousel.Item key={product.id}>
+            <Carousel.Item key={product}>
                 <img
                  style={{width: "100%", height: "450px"}}
                 src={product.img}
@@ -39,7 +37,7 @@ function PastOrderCard( {order} ) {
             </Card.Text>
         )  
 
-    })
+    });
 
 
   return (
