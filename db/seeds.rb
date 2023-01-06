@@ -25,9 +25,9 @@ Product.create(name: "Love Potion Bouquet", price: 50, img: "https://images.pexe
 
 Order.create(customer_id: 1, order_date: "2023-01-05");
 
-OrderDetail.create(product_id: 8, order_id: 1, quantity: 2, cost: 45);
-OrderDetail.create(product_id: 4, order_id: 1, quantity: 1, cost: 45);
-OrderDetail.create(product_id: 9, order_id: 1, quantity: 1, cost: 50);
+OrderDetail.create(product_id: 8, order_id: 1, quantity: 2);
+OrderDetail.create(product_id: 4, order_id: 1, quantity: 1);
+OrderDetail.create(product_id: 9, order_id: 1, quantity: 1);
 
 
 

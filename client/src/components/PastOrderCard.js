@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import { LoginContext } from './App';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Col from 'react-bootstrap/Col';
@@ -12,11 +13,11 @@ function PastOrderCard( {order} ) {
         fontSize: '20px',
     };
 
+    
  
     const renderImg = order.products.map((product) => {
-
         return (
-            <Carousel.Item>
+            <Carousel.Item key={product.id}>
                 <img
                  style={{width: "100%", height: "450px"}}
                 src={product.img}
@@ -32,11 +33,11 @@ function PastOrderCard( {order} ) {
     const renderText = order.order_details.map((details) => {
         const product = order.products.find(product => product.id === details.product_id)
         return (
-            <Card.Text>
+            <Card.Text key={product.it}>
                 {product.name} X {details.quantity}
                 <p style={{fontSize: "15px"}}>Cost Per Item: ${product.price}</p>
             </Card.Text>
-        )
+        )  
 
     })
 
@@ -53,7 +54,7 @@ function PastOrderCard( {order} ) {
         </Card.Body>
         <ListGroup className="list-group-flush" >
             <ListGroup.Item style={{backgroundColor:'darkgray'}}>Date Ordered: {order.order_date}</ListGroup.Item>
-            <ListGroup.Item style={{backgroundColor:'darkgray'}}>Cras justo odio</ListGroup.Item>
+            <ListGroup.Item style={{backgroundColor:'darkgray'}}>Total Cost: {order.total_cost}</ListGroup.Item>
         </ListGroup>
         </Card>
     </Col>

@@ -8,7 +8,7 @@ class OrderSerializer < ActiveModel::Serializer
   def total_cost
     cost = []
     self.object.order_details.each do |details|
-      product = self.object.products.find {|product| product.id = details.product_id}
+      product = self.object.products.find {|product| product.id == details.product_id}
       cost << product.price * details.quantity
     end
     return cost.sum
