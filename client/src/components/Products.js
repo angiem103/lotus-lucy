@@ -9,16 +9,8 @@ function Products( {products} ) {
 
     const {cartItems, setCartItems} = useContext(InfoContext);
 
-    function addToCart(product) {
-        const item = {
-          product_id: product.id,
-          quatity:1
-        }
-        setCartItems([...cartItems, item])
-    };
-
     const renderProducts = products.map((product) => {
-       return <ProductCard key={product.id} product={product} addToCart={addToCart} />
+       return <ProductCard key={product.id} product={product} cartItems={cartItems} setCartItems={setCartItems} />
     });
 
     return (

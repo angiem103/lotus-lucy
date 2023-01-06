@@ -5,7 +5,6 @@ import Products from './Products';
 import SignUp from './SignUp';
 import Login from './Login';
 import MyOrders from './MyOrders';
-import Cart from './Cart';
 
 
 export const LoginContext = createContext();

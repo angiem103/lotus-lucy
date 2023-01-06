@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 import { LoginContext } from './App';
-import { InfoContext } from './App';
 import Cart from './Cart';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';

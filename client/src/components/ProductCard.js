@@ -3,8 +3,16 @@ import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
-function ProductCard( {product, addToCart} ) {
+function ProductCard( {product, cartItems, setCartItems} ) {
 
+
+    function addToCart() {
+      const item = {
+        product_id: product.id,
+        quantity: 1
+      }
+      setCartItems([...cartItems, item])
+      };
     
 
     return (
