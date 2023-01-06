@@ -26,9 +26,9 @@ function NavBar() {
 
   return (
     <Navbar bg="dark" variant="dark" >
-      <Container className="navbar-nav mr-auto">
-          <Nav className="me-auto" >
-            <Nav.Link href="/" >Shop</Nav.Link>
+      <Container >
+          <Nav>
+            <Nav.Link href="/">Shop</Nav.Link>
           </Nav>
       </Container>
       <div>
