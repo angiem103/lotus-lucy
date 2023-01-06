@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, { useContext } from 'react';
 import ProductCard from './ProductCard';
 import Header from './Header';
 import Row from 'react-bootstrap/Row';

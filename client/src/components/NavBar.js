@@ -1,5 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { LoginContext } from './App';
+import { InfoContext } from './App';
+import Cart from './Cart';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -8,20 +10,27 @@ import { useNavigate } from 'react-router-dom';
 import { FiShoppingCart } from "react-icons/fi";
 
 
+
+
 function NavBar() {
 
-    const {currentUser,setCurrentUser} = useContext(LoginContext); 
-    const navigate = useNavigate()
+  const [show, setShow] = useState(false);
+  const {currentUser,setCurrentUser} = useContext(LoginContext); 
+  const navigate = useNavigate()
 
-    function handleLogout() {
-        fetch('/logout', {method: "DELETE"})
-        .then(r => {
-            if (r.ok) {
-                setCurrentUser(null)
-                navigate('/')
-            }
-        })
-    };
+  function handleLogout() {
+    fetch('/logout', {method: "DELETE"})
+    .then(r => {
+      if (r.ok) {
+        setCurrentUser(null)
+        navigate('/')
+        }
+      })
+  };
+
+  function handleShow() {
+    setShow(!show)
+  }
 
   return (
     <Navbar bg="dark" variant="dark" >
@@ -36,13 +45,15 @@ function NavBar() {
                 <Nav className="me-auto">
                     <Nav.Link href="/myorders" style={{width: '100px'}}>My Orders</Nav.Link>
                     <Button onClick={handleLogout} variant='dark'>Logout</Button>
-                    <Nav.Link href="/cart"style={{color: 'white'}}> <FiShoppingCart /></Nav.Link>
+                    <Button onClick={handleShow} variant='dark'> <FiShoppingCart /></Button>
+                    <Cart show={show} setShow={setShow}/>
                </Nav>
              : 
                 <Nav Nav className="me-auto">
                     <Nav.Link href="/login">Login</Nav.Link>
                     <Nav.Link href="/signup" style={{width: '75px'}}>Sign Up</Nav.Link>
-                    <Nav.Link href="/cart"style={{color: 'white'}}> <FiShoppingCart /></Nav.Link>
+                    <Button onClick={handleShow} variant='dark'> <FiShoppingCart /></Button>
+                    <Cart show={show} setShow={setShow}/>
                 </Nav>
             }
         </Container>

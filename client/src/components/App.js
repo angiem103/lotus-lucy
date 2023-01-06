@@ -17,6 +17,7 @@ function App() {
   const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   
+  
   useEffect(() => {
     fetch('/auth')
     .then(r => {
@@ -51,7 +52,6 @@ function App() {
             <Route path='/signup' element={ <SignUp/>}/>
             <Route path='/login' element={ <Login onLogin={handleLogin}/>}/>
             <Route path='/myorders' element= { <MyOrders />} />
-            <Route path='/cart' element= { <Cart />} />
           </Routes>
         </InfoContext.Provider>
       </LoginContext.Provider>
