@@ -31,14 +31,19 @@ function PastOrderCard( {order} ) {
 
     const renderText = order.order_details.map((details) => {
         const product = order.products.find(product => product.id === details.product_id)
-        return <Card.Text>{product.name} X {details.quantity}</Card.Text>
+        return (
+            <Card.Text>
+                {product.name} X {details.quantity}
+                <p style={{fontSize: "15px"}}>Cost Per Item: ${product.price}</p>
+            </Card.Text>
+        )
 
     })
 
 
   return (
     <Col>
-        <Card style={{ width: '18rem', fontFamily: 'andale mono, monospace' }} bg='dark' text='light' >
+        <Card style={{ width: '20rem', fontFamily: 'andale mono, monospace' }} bg='dark' text='light' >
         <Carousel>
             {renderImg}
         </Carousel>
@@ -47,9 +52,8 @@ function PastOrderCard( {order} ) {
             {renderText}
         </Card.Body>
         <ListGroup className="list-group-flush" >
+            <ListGroup.Item style={{backgroundColor:'darkgray'}}>Date Ordered: {order.order_date}</ListGroup.Item>
             <ListGroup.Item style={{backgroundColor:'darkgray'}}>Cras justo odio</ListGroup.Item>
-            <ListGroup.Item style={{backgroundColor:'darkgray'}}>Dapibus ac facilisis in</ListGroup.Item>
-            <ListGroup.Item style={{backgroundColor:'darkgray'}}>Vestibulum at eros</ListGroup.Item>
         </ListGroup>
         </Card>
     </Col>
