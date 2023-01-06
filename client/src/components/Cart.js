@@ -3,11 +3,13 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { InfoContext, LoginContext } from './App';
 import CartItems from './CartItems';
+import { useNavigate } from 'react-router-dom';
 
 function Cart( {show, setShow} ) {
 
   const {currentUser} = useContext(LoginContext);
   const {products, cartItems, setCartItems} = useContext(InfoContext);
+  const navigate = useNavigate()
 
   const handleClearCart = () => setCartItems([]);
 
@@ -21,8 +23,8 @@ function Cart( {show, setShow} ) {
         customer_id: currentUser.id,
         order_date: date,
     }
+        
 
-    console.log(newOrder)
     fetch('/orders', {
         method: 'POST',
         headers: {
@@ -34,22 +36,28 @@ function Cart( {show, setShow} ) {
     .then(ord => {      
        cartItems.forEach((item) => {
             const obj = {
-                oder_id: ord.id,
                 product_id: item.product_id,
-                quantity: item.quantity
+                order_id: ord.id,
+                quantity: item.quantity,
             }
+            console.log(ord.id)
             console.log(obj)
             fetch('/order_details', {
-            method: "POST",
-            headers: {
-                "Content-Type" : "applicatioin/json"
-            },
-            body:JSON.stringify(obj)
+                method: 'POST',
+                headers: {
+                    'Content-Type' : 'application/json'
+                },
+                body: JSON.stringify(obj)
             })
             .then(r => r.json())
-            .then(r => console.log(r))
-}
-)})
+            .then(r => {
+                console.log(r)
+                navigate('/myorders')
+            })
+        }
+    )}
+    )
+
   }
 
   const modalStyling = {
