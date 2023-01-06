@@ -8,9 +8,6 @@ import { useNavigate } from 'react-router-dom';
 import { FiShoppingCart } from "react-icons/fi";
 
 
-
-
-
 function NavBar() {
 
     const {currentUser,setCurrentUser} = useContext(LoginContext); 
@@ -36,16 +33,16 @@ function NavBar() {
       <div>
         <Container className="navbar-nav ml-auto">
             {currentUser ? 
-                <Nav Nav className="me-auto">
+                <Nav className="me-auto">
                     <Nav.Link href="/myorders" style={{width: '100px'}}>My Orders</Nav.Link>
                     <Button onClick={handleLogout} variant='dark'>Logout</Button>
-                    <Nav.Link style={{color: 'white'}}> <FiShoppingCart /></Nav.Link>
+                    <Nav.Link href="/cart"style={{color: 'white'}}> <FiShoppingCart /></Nav.Link>
                </Nav>
              : 
                 <Nav Nav className="me-auto">
                     <Nav.Link href="/login">Login</Nav.Link>
                     <Nav.Link href="/signup" style={{width: '75px'}}>Sign Up</Nav.Link>
-                    <Nav.Link style={{color: 'white'}}> <FiShoppingCart /></Nav.Link>
+                    <Nav.Link href="/cart"style={{color: 'white'}}> <FiShoppingCart /></Nav.Link>
                 </Nav>
             }
         </Container>

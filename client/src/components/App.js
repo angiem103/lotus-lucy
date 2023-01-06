@@ -5,14 +5,17 @@ import Products from './Products';
 import SignUp from './SignUp';
 import Login from './Login';
 import MyOrders from './MyOrders';
+import Cart from './Cart';
 
 
-export const LoginContext = createContext()
+export const LoginContext = createContext();
+export const InfoContext = createContext();
 
 function App() {
 
   const [currentUser, setCurrentUser] = useState();
   const [products, setProducts] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
   
   useEffect(() => {
     fetch('/auth')
@@ -40,14 +43,17 @@ function App() {
 
   return (
     <div>
-      <LoginContext.Provider value={{products,currentUser,setCurrentUser}}>
-      <NavBar/>
-        <Routes> 
-          <Route path='/' element={<Products products={products}/>} />
-          <Route path='/signup' element={ <SignUp/>}/>
-          <Route path='/login' element={ <Login onLogin={handleLogin}/>}/>
-          <Route path='/myorders' element= { <MyOrders />} />
-        </Routes>
+      <LoginContext.Provider value={{currentUser,setCurrentUser}}>
+        <InfoContext.Provider value={{products,cartItems, setCartItems}}>
+          <NavBar/>
+          <Routes> 
+            <Route path='/' element={<Products products={products}/>} />
+            <Route path='/signup' element={ <SignUp/>}/>
+            <Route path='/login' element={ <Login onLogin={handleLogin}/>}/>
+            <Route path='/myorders' element= { <MyOrders />} />
+            <Route path='/cart' element= { <Cart />} />
+          </Routes>
+        </InfoContext.Provider>
       </LoginContext.Provider>
     </div>
   );

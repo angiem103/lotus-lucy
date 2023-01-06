@@ -3,9 +3,10 @@ import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
-function ProductCard( {product} ) {
+function ProductCard( {product, addToCart} ) {
 
-  
+    
+
     return (
         <Col>
         <Card style={{ width: '22rem', height: '35rem',fontFamily: 'andale mono, monospace' }} bg='dark' text='light'>
@@ -15,7 +16,7 @@ function ProductCard( {product} ) {
           <Card.Text>
             ${product.price}
           </Card.Text>
-            <Button onClick={addToCart}variant='dark'>Add To Cart</Button>
+            <Button onClick={addToCart} variant='dark'>Add To Cart</Button>
         </Card.Body>
       </Card>
       </Col>

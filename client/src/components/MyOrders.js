@@ -18,7 +18,7 @@ function MyOrders() {
 
     const renderOrders = currentUser && currentUser.orders ? currentUser.orders.map(order => <PastOrderCard key={order.id} order={order} />) : undefined
 
-    return currentUser ? (
+    return (
         <div>
         <h1 style={headerStyle}>MY ORDERS</h1>
         <div style={{padding: "30px"}}>
@@ -27,7 +27,7 @@ function MyOrders() {
             </Row>
         </div>
        </div>
-    ) : <h1 style={headerStyle}>YOU ARE NOT LOGGED IN</h1>
+    )
 };
 
 export default MyOrders;
