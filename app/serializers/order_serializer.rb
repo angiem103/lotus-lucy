@@ -1,9 +1,10 @@
 class OrderSerializer < ActiveModel::Serializer
-  attributes :id, :customer_id, :order_date, :total_cost
+  attributes :id, :customer_id, :order_date, :total_cost, :item_details
 
   belongs_to :customer
   has_many :order_details
   has_many :products
+
 
   def total_cost
     cost = []
@@ -13,5 +14,7 @@ class OrderSerializer < ActiveModel::Serializer
     end
     return cost.sum
   end
+
+ 
 
 end

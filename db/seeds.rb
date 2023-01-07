@@ -24,10 +24,13 @@ Product.create(name: "Sweet Surprise Bouquet", price: 50, img:"https://images.pe
 Product.create(name: "Love Potion Bouquet", price: 50, img: "https://images.pexels.com/photos/9924900/pexels-photo-9924900.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
 
 Order.create(customer_id: 1, order_date: "2023-01-05");
+Order.create(customer_id: 1, order_date: "2023-01-06");
 
 OrderDetail.create(product_id: 8, order_id: 1, quantity: 2);
 OrderDetail.create(product_id: 4, order_id: 1, quantity: 1);
 OrderDetail.create(product_id: 9, order_id: 1, quantity: 1);
+OrderDetail.create(product_id: 3, order_id: 2, quantity: 1);
+OrderDetail.create(product_id: 6, order_id: 2, quantity: 2);
 
 
 

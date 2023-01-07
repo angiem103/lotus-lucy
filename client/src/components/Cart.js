@@ -22,8 +22,10 @@ function Cart( {show, setShow} ) {
     const newOrder = {
         customer_id: currentUser.id,
         order_date: date,
+        item_details: cartItems
     }
-        
+        console.log(cartItems)
+        console.log(newOrder)
 
     fetch('/orders', {
         method: 'POST',
@@ -33,38 +35,10 @@ function Cart( {show, setShow} ) {
         body: JSON.stringify(newOrder)
     })
     .then(r => r.json())
-    .then(ord => {      
-       cartItems.forEach((item) => {
-            const obj = {
-                product_id: item.product_id,
-                order_id: ord.id,
-                quantity: item.quantity,
-            }
-            console.log(ord.id)
-            console.log(obj)
-            fetch('/order_details', {
-                method: 'POST',
-                headers: {
-                    'Content-Type' : 'application/json'
-                },
-                body: JSON.stringify(obj)
-            })
-            .then(r => r.json())
-            .then(r => {
-                console.log(r)
-                navigate('/myorders')
-            })
-        }
-    )}
-    )
+    .then(ord => console.log(ord))
 
   }
 
-  const modalStyling = {
-    backgroundColor: 'rgb(30, 31, 31)',
-    color: "white",
-    fontFamily: 'andale mono, monospace'
-  };
 
   const renderCartItems = cartItems.map((item) => <CartItems item={item}/>)
   const cartCosts = cartItems.map((item) => {
@@ -74,6 +48,12 @@ function Cart( {show, setShow} ) {
   
   const cartTotal = cartCosts.reduce((prev, curr) => prev + curr, 0)
 
+
+  const modalStyling = {
+    backgroundColor: 'rgb(30, 31, 31)',
+    color: "white",
+    fontFamily: 'andale mono, monospace'
+  };
 
   return (
 

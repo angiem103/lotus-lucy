@@ -9,4 +9,15 @@ class OrderDetailsController < ApplicationController
         end
     end
 
+    def create
+        order_details = OrderDetail.create(order_details_params)
+        render json: order_details, status: :created
+    end
+
+    private
+
+    def order_details_params
+        params.permit(:order_id, :product_id, :quantity)
+    end
+
 end

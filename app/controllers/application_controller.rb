@@ -4,7 +4,7 @@ class ApplicationController < ActionController::API
   before_action :authorized
 
   def authorized
-    retunr render json:{ error: "Not Authorized" }, status: :unauthorized unless
+    return render json:{ error: "Not Authorized" }, status: :unauthorized unless
     session.include? :customer_id
   end
 
