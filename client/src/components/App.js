@@ -6,6 +6,7 @@ import SignUp from './SignUp';
 import Login from './Login';
 import MyOrders from './MyOrders';
 import EditOrder from './EditOrder';
+import NewProduct from './NewProduct';
 
 
 export const LoginContext = createContext();
@@ -14,7 +15,7 @@ export const InfoContext = createContext();
 function App() {
 
   const [currentUser, setCurrentUser] = useState();
-  const [userOrders, setUserOrders] = useState([])
+  const [userOrders, setUserOrders] = useState()
   const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   
@@ -30,6 +31,8 @@ function App() {
     })
   }, []);
 
+  console.log(currentUser)
+  console.log(userOrders)
 
   useEffect(() => {
     fetch('/products')
@@ -56,6 +59,7 @@ function App() {
             <Route path='/login' element={ <Login onLogin={handleLogin}/>}/>
             <Route path='/myorders' element= { <MyOrders />} />
             <Route path='/editorder/:id' element= { <EditOrder />} />
+            <Route path='newproduct' element= { <NewProduct />} />
           </Routes>
         </InfoContext.Provider>
       </LoginContext.Provider>

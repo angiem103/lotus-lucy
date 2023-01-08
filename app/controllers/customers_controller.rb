@@ -13,7 +13,7 @@ class CustomersController < ApplicationController
 
     def show
         current_user = Customer.find(session[:customer_id])
-        render json: current_user
+        render json: current_user, include: [ 'orders', 'orders.order_details', 'orders.products'] 
     end
 
     def create

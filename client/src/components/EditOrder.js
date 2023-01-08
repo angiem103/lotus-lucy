@@ -32,11 +32,11 @@ function EditOrder () {
     const navigate = useNavigate();
     const params = useParams();
 
-    const order = userOrders ? userOrders.find((order) => String(order.id) === params.id) : undefined
+    const order = userOrders.find((order) => String(order.id) === params.id);
     
-    const renderDetails = userOrders && order ? order.order_details.map((details) => {
+    const renderDetails = userOrders && order && order.order_details ? order.order_details.map((details) => {
        return <DetailCard details={details} order={order}/>
-    }) : null
+    }) : undefined
 
 
    function handleSubmit(e) {

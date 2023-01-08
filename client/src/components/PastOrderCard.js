@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Col from 'react-bootstrap/Col';
 import Carousel from 'react-bootstrap/Carousel';
 import Button from 'react-bootstrap/esm/Button';
 import { useNavigate } from 'react-router-dom';
+import { InfoContext } from './App';
 
 
 function PastOrderCard( {order, onOrderDelete} ) {
+
+    console.log(order)
 
     const captionStyle = {
         color: 'white',
@@ -15,11 +18,13 @@ function PastOrderCard( {order, onOrderDelete} ) {
         fontSize: '20px',
     };
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    // const {products} = useContext(InfoContext);
 
-    console.log(order.products)
 
-    const renderImg = order && order.products ? order.products.map((product) => {
+    const renderImg = order.products.map((product) => {
+
+        console.log(product)
         return (
             <Carousel.Item key={product.id}>
                 <img
@@ -32,8 +37,7 @@ function PastOrderCard( {order, onOrderDelete} ) {
                 </Carousel.Caption>
             </Carousel.Item>
         ) 
-    }) : undefined
-
+    }) 
     const renderText = order && order.order_details ? order.order_details.map((details) => {
         return (
             <Card.Text key={details.id}>
@@ -43,7 +47,7 @@ function PastOrderCard( {order, onOrderDelete} ) {
             </Card.Text>
         )  
 
-    }) : undefined
+    }) : null
 
     function handleOrderDelete() {
         fetch(`/orders/${order.id}`, {

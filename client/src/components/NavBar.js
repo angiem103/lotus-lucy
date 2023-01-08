@@ -43,6 +43,7 @@ function NavBar() {
             {currentUser ? 
                 <Nav className="me-auto">
                     <Nav.Link href="/myorders" style={{width: '100px'}}>My Orders</Nav.Link>
+                    <Nav.Link href="/newproduct" style={{width: '115px'}}>Add Bouquet</Nav.Link>
                     <Button onClick={handleLogout} variant='dark'>Logout</Button>
                     <Button onClick={handleShow} variant='dark'> <FiShoppingCart /></Button>
                     <Cart show={show} setShow={setShow}/>

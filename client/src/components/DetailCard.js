@@ -15,7 +15,7 @@ function DetailCard( {details, order} ) {
     
     return (
         <div>
-        <Form.Group className="mb-3" controlId="formBasicName">
+        <Form.Group className="mb-3" controlId="orderDetail">
             <Form.Label>{details.product.name} </Form.Label>
             <InputGroup className="mb-3" >
                 <InputGroup.Text>Quantity</InputGroup.Text>

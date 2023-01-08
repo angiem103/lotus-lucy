@@ -32,8 +32,6 @@ function Header() {
 
     const {currentUser} = useContext(LoginContext)
 
-    console.log(currentUser)
-
     return(
         <div>
             <h1 style={headerStyle}>LOTUS LUCY</h1>
