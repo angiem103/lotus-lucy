@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-
+    wrap_parameters format: []
     skip_before_action :authorized, only: :create
 
     def index
@@ -49,7 +49,7 @@ class OrdersController < ApplicationController
     private
 
     def order_params
-        params.permit(:customer_id, :order_date,{ item_details: [:product_id, :quantity] })
+        params.permit(:customer_id, :order_date, {item_details: [:product_id, :quantity]}.to_json)
     end
 
 end
