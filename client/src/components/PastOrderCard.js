@@ -1,16 +1,14 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Col from 'react-bootstrap/Col';
 import Carousel from 'react-bootstrap/Carousel';
 import Button from 'react-bootstrap/esm/Button';
 import { useNavigate } from 'react-router-dom';
-import { InfoContext } from './App';
+
 
 
 function PastOrderCard( {order, onOrderDelete} ) {
-
-    console.log(order)
 
     const captionStyle = {
         color: 'white',
@@ -19,7 +17,6 @@ function PastOrderCard( {order, onOrderDelete} ) {
     };
 
     const navigate = useNavigate();
-    // const {products} = useContext(InfoContext);
 
 
     const renderImg = order.products.map((product) => {

@@ -6,7 +6,7 @@ import { LoginContext } from "./App";
 
 
 
-function SignUp () {
+function SignUp ({ onLogin }) {
 
     const formStyle = {
         backgroundColor: 'rgb(30, 31, 31)',
@@ -25,7 +25,7 @@ function SignUp () {
         fontSize: '50px',
     };
 
-    const {setCurrentUser} = useContext(LoginContext);
+    const {setCurrentUser, currentUser} = useContext(LoginContext);
     const navigate = useNavigate();
 
     const [name, setName] = useState('');
@@ -56,12 +56,12 @@ function SignUp () {
         })
         .then(r => {
             if(r.ok){
-                r.json().then(setCurrentUser(customer)).then(navigate('/'))
+                r.json().then(setCurrentUser).then(navigate('/')).then(console.log(currentUser))
             } else {
                 r.json().then((err) => setErrors(err.errors))
             }
         })
-    }
+    };
 
 
     return (

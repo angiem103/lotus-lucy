@@ -32,7 +32,6 @@ function App() {
   }, []);
 
   console.log(currentUser)
-  console.log(userOrders)
 
   useEffect(() => {
     fetch('/products')
