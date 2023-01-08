@@ -51,7 +51,7 @@ function App() {
   return (
     <div>
       <LoginContext.Provider value={{currentUser,setCurrentUser, userOrders, setUserOrders}}>
-        <InfoContext.Provider value={{products,cartItems, setCartItems}}>
+        <InfoContext.Provider value={{products,setProducts,cartItems, setCartItems}}>
           <NavBar/>
           <Routes> 
             <Route path='/' element={<Products products={products}/>} />

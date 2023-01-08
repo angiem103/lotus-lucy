@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from "react-router-dom";
-import { LoginContext } from "./App";
+import { InfoContext } from "./App";
 
 
 
@@ -25,20 +25,20 @@ function NewProduct () {
         fontSize: '50px',
     };
 
-    const {setCurrentUser} = useContext(LoginContext);
+    const {products,setProducts} = useContext(InfoContext);
     const navigate = useNavigate();
 
     const [name, setName] = useState('');
     const [price, setPrice] = useState( );
     const [img, setImg] = useState('');
-    const [errors, setErrors] = useState()
+    const [errors, setErrors] = useState( );
 
 
    function handleSubmit(e) {
         e.preventDefault()
         const bouquet = {
             name: name,
-            price: price,
+            price: parseInt(price),
             img: img
         }
 
@@ -51,12 +51,12 @@ function NewProduct () {
         })
         .then(r => {
             if(r.ok){
-                r.json().then(console.log(bouquet)).then(navigate('/'))
+                r.json().then(setProducts([...products,bouquet])).then(navigate('/'))
             } else {
                 r.json().then((err) => setErrors(err.errors))
             }
         })
-    }
+    };
 
 
     return (
@@ -78,13 +78,12 @@ function NewProduct () {
             <Button variant="dark" type="submit">
                 Submit
              </Button>
-             <br></br>
-             <ul style={{ color: "lightcoral", fontSize: "12px"}}>
+             <ul style={{ color: "lightcoral", fontSize: "12px", paddingTop: '10px'}}>
                 { errors ? errors.map((error) => <li>{error}</li>) : null}
              </ul>
             </Form>
         </div>
       );
-}
+};
 
 export default NewProduct;
