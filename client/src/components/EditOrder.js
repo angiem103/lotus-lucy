@@ -58,7 +58,7 @@ function EditOrder () {
         })
         .then(r => {
             if(r.ok){
-                r.json().then(navigate('/'))
+                r.json().then(navigate('/myorders'))
             } 
         })
         })
