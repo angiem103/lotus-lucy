@@ -22,7 +22,15 @@ class OrdersController < ApplicationController
 
     def create
         order = Order.create(order_params)
-        render json: order, status: :created
+        byebug
+        if order.valid?
+            order.item_details.each do |i|
+                OrderDetail.create(order_id: params[:id], product_id: i[:product_id], quantity: i[:quantity])
+            end
+            render json: order
+        else
+            render json: { errors: order.errors.full_messages }, status: :unprocessable_entity
+        end
     end
 
     def update
@@ -49,7 +57,7 @@ class OrdersController < ApplicationController
     private
 
     def order_params
-        params.permit(:customer_id, :order_date, {item_details: [:product_id, :quantity]}.to_json)
+        params.permit(:customer_id, :order_date, item_details: [:product_id, :quantity] )
     end
 
 end
