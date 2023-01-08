@@ -23,7 +23,10 @@ Lotus Lucy is a full-stack one page application that I've created for a flower s
 
 ## Models and Relationships
 
-
+* A User has many Orders
+* An Order has many Products through OrderDetails
+* A Product belongs to many Orders through OrderDetails
+* An OrderDetail belongs to an Order and a Product
 
 ```python
 import foobar
