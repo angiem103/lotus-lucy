@@ -1,5 +1,7 @@
 class CustomersController < ApplicationController
 
+    skip_before_action :authorized, only: :create
+    
     def index
         customers = Customer.all
         if customers
@@ -10,12 +12,8 @@ class CustomersController < ApplicationController
     end
 
     def show
-        customer = Customer.find(session[:customer_id])
-        if customer
-            render json: customer, include: [ 'orders', 'orders.order_details', 'orders.products'] 
-        else
-            render json: { error: "Customer Not Found" }, status: :not_found
-        end
+        current_user = Customer.find(session[:customer_id])
+        render json: current_user
     end
 
     def create

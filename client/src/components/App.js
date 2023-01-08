@@ -18,18 +18,18 @@ function App() {
   const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   
-  
   useEffect(() => {
     fetch('/auth')
     .then(r => {
       if(r.ok) {
-        r.json().then(user => {
+        r.json().then((user)=> {
           setCurrentUser(user)
           setUserOrders(user.orders)
-        })
-      } 
+      })
+    }
     })
   }, []);
+
 
   useEffect(() => {
     fetch('/products')
@@ -39,6 +39,7 @@ function App() {
       }
     })
   },[]);
+
 
   function handleLogin(user) {
     setCurrentUser(user)

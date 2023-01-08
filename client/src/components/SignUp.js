@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { useNavigate } from "react-router-dom";
+import { LoginContext } from "./App";
 
 
 
@@ -22,6 +24,9 @@ function SignUp () {
         fontFamily: 'andale mono, monospace',
         fontSize: '50px',
     };
+
+    const {setCurrentUser} = useContext(LoginContext);
+    const navigate = useNavigate();
 
     const [name, setName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -51,7 +56,7 @@ function SignUp () {
         })
         .then(r => {
             if(r.ok){
-                r.json(console.log(customer))
+                r.json().then(setCurrentUser(customer)).then(navigate('/'))
             } else {
                 r.json().then((err) => setErrors(err.errors))
             }
@@ -92,7 +97,7 @@ function SignUp () {
              </Button>
              <br></br>
              <ul style={{ color: "lightcoral", fontSize: "12px"}}>
-                {errors.map((error) => <li>{error}</li>)}
+                { errors ? errors.map((error) => <li>{error}</li>) : null}
              </ul>
             </Form>
         </div>

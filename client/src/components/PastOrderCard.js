@@ -17,7 +17,9 @@ function PastOrderCard( {order, onOrderDelete} ) {
 
     const navigate = useNavigate()
 
-    const renderImg = order.products.map((product) => {
+    console.log(order.products)
+
+    const renderImg = order && order.products ? order.products.map((product) => {
         return (
             <Carousel.Item key={product.id}>
                 <img
@@ -30,9 +32,9 @@ function PastOrderCard( {order, onOrderDelete} ) {
                 </Carousel.Caption>
             </Carousel.Item>
         ) 
-    });
+    }) : undefined
 
-    const renderText = order.order_details.map((details) => {
+    const renderText = order && order.order_details ? order.order_details.map((details) => {
         return (
             <Card.Text key={details.id}>
                 {details.product.name} X {details.quantity}
@@ -41,7 +43,7 @@ function PastOrderCard( {order, onOrderDelete} ) {
             </Card.Text>
         )  
 
-    });
+    }) : undefined
 
     function handleOrderDelete() {
         fetch(`/orders/${order.id}`, {
