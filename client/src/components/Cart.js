@@ -3,13 +3,11 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { InfoContext, LoginContext } from './App';
 import CartItems from './CartItems';
-import { useNavigate } from 'react-router-dom';
 
 function Cart( {show, setShow} ) {
 
   const {currentUser} = useContext(LoginContext);
   const {products, cartItems, setCartItems} = useContext(InfoContext);
-  const navigate = useNavigate()
 
   const handleClearCart = () => setCartItems([]);
 

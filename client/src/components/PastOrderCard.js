@@ -3,8 +3,11 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Col from 'react-bootstrap/Col';
 import Carousel from 'react-bootstrap/Carousel';
+import Button from 'react-bootstrap/esm/Button';
+import { useNavigate } from 'react-router-dom';
 
-function PastOrderCard( {order} ) {
+
+function PastOrderCard( {order, onOrderDelete} ) {
 
     const captionStyle = {
         color: 'white',
@@ -12,10 +15,11 @@ function PastOrderCard( {order} ) {
         fontSize: '20px',
     };
 
- 
+    const navigate = useNavigate()
+
     const renderImg = order.products.map((product) => {
         return (
-            <Carousel.Item key={product}>
+            <Carousel.Item key={product.id}>
                 <img
                  style={{width: "100%", height: "450px"}}
                 src={product.img}
@@ -29,16 +33,23 @@ function PastOrderCard( {order} ) {
     });
 
     const renderText = order.order_details.map((details) => {
-        const product = order.products.find(product => product.id === details.product_id)
         return (
-            <Card.Text key={product.it}>
-                {product.name} X {details.quantity}
-                <p style={{fontSize: "15px"}}>Cost Per Item: ${product.price}</p>
+            <Card.Text key={details.id}>
+                {details.product.name} X {details.quantity}
+                <br></br>
+                <span style={{fontSize: "15px"}}>Cost Per Item: ${details.product.price}</span>
             </Card.Text>
         )  
 
     });
 
+    function handleOrderDelete() {
+        fetch(`/orders/${order.id}`, {
+            method: "DELETE"
+        }).then(()=> {
+            onOrderDelete(order)
+        });
+    }
 
   return (
     <Col>
@@ -52,7 +63,11 @@ function PastOrderCard( {order} ) {
         </Card.Body>
         <ListGroup className="list-group-flush" >
             <ListGroup.Item style={{backgroundColor:'darkgray'}}>Date Ordered: {order.order_date}</ListGroup.Item>
-            <ListGroup.Item style={{backgroundColor:'darkgray'}}>Total Cost: {order.total_cost}</ListGroup.Item>
+            <ListGroup.Item style={{backgroundColor:'darkgray'}}>Total Cost: ${order.total_cost}</ListGroup.Item>
+            <ListGroup.Item style={{backgroundColor:'darkgray'}}>
+                <Button variant='dark' onClick={() => navigate(`/editorder/${order.id}`)}>Change Order</Button>
+                <Button variant='dark' style={{marginLeft: '3.5px'}} onClick={handleOrderDelete}>Delete Order</Button>
+            </ListGroup.Item>
         </ListGroup>
         </Card>
     </Col>

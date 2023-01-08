@@ -35,6 +35,16 @@ class OrdersController < ApplicationController
         end
     end
 
+    def destroy
+        order = Order.find_by(id: params[:id])
+        if order
+            order.destroy
+            head :no_content
+        else
+            render json: {error: "Order Not Found"}, status: :not_found
+        end
+    end
+
 
     private
 

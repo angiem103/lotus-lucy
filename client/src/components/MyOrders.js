@@ -14,9 +14,15 @@ function MyOrders() {
         fontSize: '40px',
     };
 
-    const {currentUser} = useContext(LoginContext);
+    const {userOrders, setUserOrders } = useContext(LoginContext);
 
-    const renderOrders = currentUser && currentUser.orders ? currentUser.orders.map(order => <PastOrderCard key={order.id} order={order} />) : undefined
+    function deleteOrder(deletedOrder) {
+        const filteredOrders = [...userOrders].filter(order => order.id !== deletedOrder.id )
+        setUserOrders(filteredOrders)  
+    };
+
+    
+    const renderOrders = userOrders ? userOrders.map(order => <PastOrderCard key={order.total_cost} order={order} onOrderDelete={deleteOrder}/>) : undefined
 
     return (
         <div>

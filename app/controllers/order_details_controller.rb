@@ -11,7 +11,11 @@ class OrderDetailsController < ApplicationController
 
     def create
         order_details = OrderDetail.create(order_details_params)
-        render json: order_details, status: :created
+        if customer.valid?
+            render json: order_details
+        else
+            render json: { errors: order_details.errors.full_messages }, status: :unprocessable_entity
+        end
     end
 
     private

@@ -5,6 +5,7 @@ import Products from './Products';
 import SignUp from './SignUp';
 import Login from './Login';
 import MyOrders from './MyOrders';
+import EditOrder from './EditOrder';
 
 
 export const LoginContext = createContext();
@@ -13,6 +14,7 @@ export const InfoContext = createContext();
 function App() {
 
   const [currentUser, setCurrentUser] = useState();
+  const [userOrders, setUserOrders] = useState([])
   const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   
@@ -23,6 +25,7 @@ function App() {
       if(r.ok) {
         r.json().then(user => {
           setCurrentUser(user)
+          setUserOrders(user.orders)
         })
       } 
     })
@@ -43,7 +46,7 @@ function App() {
 
   return (
     <div>
-      <LoginContext.Provider value={{currentUser,setCurrentUser}}>
+      <LoginContext.Provider value={{currentUser,setCurrentUser, userOrders, setUserOrders}}>
         <InfoContext.Provider value={{products,cartItems, setCartItems}}>
           <NavBar/>
           <Routes> 
@@ -51,6 +54,7 @@ function App() {
             <Route path='/signup' element={ <SignUp/>}/>
             <Route path='/login' element={ <Login onLogin={handleLogin}/>}/>
             <Route path='/myorders' element= { <MyOrders />} />
+            <Route path='/editorder/:id' element= { <EditOrder />} />
           </Routes>
         </InfoContext.Provider>
       </LoginContext.Provider>

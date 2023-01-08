@@ -48,7 +48,7 @@ function NavBar() {
                     <Cart show={show} setShow={setShow}/>
                </Nav>
              : 
-                <Nav Nav className="me-auto">
+                <Nav className="me-auto">
                     <Nav.Link href="/login">Login</Nav.Link>
                     <Nav.Link href="/signup" style={{width: '75px'}}>Sign Up</Nav.Link>
                     <Button onClick={handleShow} variant='dark'> <FiShoppingCart /></Button>
