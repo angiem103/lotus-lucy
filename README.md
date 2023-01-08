@@ -31,16 +31,23 @@ Lotus Lucy is a full-stack one page application that I've created for a flower-s
 * A Product belongs to many Orders through OrderDetails
 * An OrderDetail belongs to an Order and a Product
 
+## Commands
+After forking/cloning the repo:
+  - Run bundle install 
+  - Run npm install --prefix client
+  - Run npm start --prefix client
+  - Run rails s
+
+## Ports used
+
+* React front-end: localhost:4000
+* Ruby back-end: localhost:3000
+
 
 
 ## Contributing
 
-Pull requests are welcome. For major changes, please open an issue first
-to discuss what you would like to change.![Uploading Screen Shot 2023-01-08 at 6.17.45 PM.png…]()
-
-
-Please make sure to update tests as appropriate.
-
+Thank you for showing interest in my project! Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
 
 ## License
 
