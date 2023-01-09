@@ -53,7 +53,7 @@ function Cart( {show, setShow} ) {
     fontFamily: 'andale mono, monospace'
   };
 
-  return (
+  return currentUser ? (
 
     <div >
         <Modal show={show} onHide={() => setShow(false)} >
@@ -74,7 +74,14 @@ function Cart( {show, setShow} ) {
         </Modal.Footer>
         </Modal>
     </div>
-  );
+  ) : 
+  <div >
+      <Modal show={show} onHide={() => setShow(false)} >
+      <Modal.Header closeButton style={modalStyling} >
+          <Modal.Title>You Must Login or Sign Up</Modal.Title>
+      </Modal.Header>
+      </Modal>
+  </div>
 };
 
 export default Cart;

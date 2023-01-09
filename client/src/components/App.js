@@ -46,7 +46,7 @@ function App() {
   function handleLogin(user) {
     setCurrentUser(user)
   }
-
+  
   return (
     <div>
       <LoginContext.Provider value={{currentUser,setCurrentUser, userOrders, setUserOrders}}>
@@ -65,5 +65,6 @@ function App() {
     </div>
   );
 };
+
 
 export default App;
