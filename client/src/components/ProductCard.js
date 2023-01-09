@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
@@ -10,6 +10,20 @@ function ProductCard( {product, cartItems, setCartItems} ) {
 
   const {currentUser} = useContext(LoginContext)
 
+  function simulateNetworkRequest() {
+    return new Promise((resolve) => setTimeout(resolve, 2000));
+  }
+ 
+    const [isLoading, setLoading] = useState(false);
+  
+    useEffect(() => {
+      if (isLoading) {
+        simulateNetworkRequest().then(() => {
+          setLoading(false);
+        });
+      }
+    }, [isLoading]);
+
     function addToCart() {
       if (currentUser) {
       const item = {
@@ -17,6 +31,7 @@ function ProductCard( {product, cartItems, setCartItems} ) {
         quantity: 1
       }
       setCartItems([...cartItems, item])
+      setLoading(true)
       } 
     };
     
@@ -34,7 +49,7 @@ function ProductCard( {product, cartItems, setCartItems} ) {
           <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">You Must Login To Order</Tooltip>}>
             <Button onClick={addToCart} variant='dark'>Add To Cart</Button>
             </OverlayTrigger> :
-          <Button onClick={addToCart} variant='dark'>Add To Cart</Button>
+          <Button onClick={!isLoading? addToCart : null} variant='dark'>{isLoading ? 'Added' : 'Add To Cart'}</Button>
           }
         </Card.Body>
       </Card>
