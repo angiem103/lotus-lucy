@@ -22,10 +22,9 @@ class OrdersController < ApplicationController
 
     def create
         order = Order.create(order_params)
-        byebug
         if order.valid?
-            order.item_details.each do |i|
-                OrderDetail.create(order_id: params[:id], product_id: i[:product_id], quantity: i[:quantity])
+                order.item_details.each do |item_attribs|
+                    order.order_details.create(item_attribs)
             end
             render json: order
         else

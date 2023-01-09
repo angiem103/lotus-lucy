@@ -20,7 +20,7 @@ function Cart( {show, setShow} ) {
     const newOrder = {
         customer_id: currentUser.id,
         order_date: date,
-        item_details: [cartItems]
+        item_details: cartItems
     }
         console.log(cartItems)
         console.log(newOrder)
