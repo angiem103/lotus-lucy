@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { LoginContext } from "./App";
 import PastOrderCard from "./PastOrderCard";
 import Row from 'react-bootstrap/Row';
+import Loader from "./Loader";
 
 function MyOrders() {
 
@@ -16,6 +17,14 @@ function MyOrders() {
 
     const {userOrders, setUserOrders } = useContext(LoginContext);
 
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+      setTimeout(() => {
+        setIsLoading(false)
+        }, 1000)
+    })
+
     function deleteOrder(deletedOrder) {
         const filteredOrders = [...userOrders].filter(order => order.id !== deletedOrder.id )
         setUserOrders(filteredOrders)  
@@ -24,7 +33,7 @@ function MyOrders() {
     
     const renderOrders = userOrders ? userOrders.map(order => <PastOrderCard key={order.total_cost} order={order} onOrderDelete={deleteOrder}/>) : undefined
 
-    return (
+    return isLoading ? <Loader/> : (
         <div>
         <h1 style={headerStyle}>MY ORDERS</h1>
         <div style={{padding: "30px"}}>

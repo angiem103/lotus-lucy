@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import DetailCard from "./DetailCard";
@@ -26,22 +26,25 @@ function EditOrder () {
         fontFamily: 'andale mono, monospace',
         fontSize: '50px',
     };
-
-    const {userOrders} = useContext(LoginContext);
+    
+    const {userOrders, setUserOrders} = useContext(LoginContext);
+    const [updatedOrder, setUpdatedOrder] = useState()
+   
 
     const navigate = useNavigate();
     const params = useParams();
 
-    const order = userOrders.find((order) => String(order.id) === params.id);
+    const order = userOrders ? userOrders.find((order) => String(order.id) === params.id) : undefined
     
-    const renderDetails = userOrders && order && order.order_details ? order.order_details.map((details) => {
-       return <DetailCard details={details} order={order}/>
-    }) : undefined
+    const renderDetails = order ? order.order_details.map((details) => {
+       return <DetailCard details={details}  order={order} setUpdatedOrder={setUpdatedOrder} userOrders={userOrders}/>
+    }) : null
 
 
    function handleSubmit(e) {
         e.preventDefault()
 
+        const filteredOrders = userOrders.filter(ord => ord.id !== order.id)
         order.order_details.forEach((detail) => {
             const newDet = {
                 id: detail.id,
@@ -58,7 +61,7 @@ function EditOrder () {
         })
         .then(r => {
             if(r.ok){
-                r.json().then(navigate('/myorders'))
+                r.json().then(navigate('/myorders')).then(setUserOrders([...filteredOrders, updatedOrder]))
             } 
         })
         })

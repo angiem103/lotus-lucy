@@ -31,7 +31,6 @@ function App() {
     })
   }, []);
 
-  console.log(currentUser)
 
   useEffect(() => {
     fetch('/products')

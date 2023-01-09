@@ -23,8 +23,8 @@ class OrdersController < ApplicationController
     def create
         order = Order.create(order_params)
         if order.valid?
-                order.item_details.each do |item_attribs|
-                    order.order_details.create(item_attribs)
+            order.item_details.each do |item_attribs|
+                order.order_details.create(item_attribs)
             end
             render json: order
         else
