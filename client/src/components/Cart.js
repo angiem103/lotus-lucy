@@ -1,13 +1,15 @@
 import React, { useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { useNavigate } from 'react-router-dom';
 import { InfoContext, LoginContext } from './App';
 import CartItems from './CartItems';
 
 function Cart( {show, setShow} ) {
 
-  const {currentUser} = useContext(LoginContext);
+  const {currentUser, setUserOrders, userOrders} = useContext(LoginContext);
   const {products, cartItems, setCartItems} = useContext(InfoContext);
+  const navigate = useNavigate()
 
   const handleClearCart = () => setCartItems([]);
 
@@ -33,7 +35,10 @@ function Cart( {show, setShow} ) {
         body: JSON.stringify(newOrder)
     })
     .then(r => r.json())
-    .then(ord => console.log(ord))
+    .then(newOrd => {
+      setUserOrders([...userOrders, newOrd])
+      navigate('/myorders')
+    })
 
   }
 
