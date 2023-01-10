@@ -32,7 +32,7 @@ function PastOrderCard( {order, onOrderDelete} ) {
                 </Carousel.Caption>
             </Carousel.Item>
         ) 
-    })
+    }) 
     
     const renderText = order.order_details.map((details) => {
         return (
@@ -43,7 +43,7 @@ function PastOrderCard( {order, onOrderDelete} ) {
             </Card.Text>
         )  
 
-    })
+    })  
 
     function handleOrderDelete() {
         fetch(`/orders/${order.id}`, {
