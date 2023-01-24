@@ -4,10 +4,11 @@ Rails.application.routes.draw do
   delete "/logout", to: "sessions#destroy"
   get "/auth", to: "customers#show"
 
+  get "/big_orders/:number", to:"orders#big"
 
-  resources :customers
-  resources :orders
-  resources :order_details
+  resources :customers, only: [:show, :create]
+  resources :orders, only: [:show, :create, :update, :destroy]
+  resources :order_details, only: [:create, :update]
   resources :products
 
   # Routing logic: fallback requests for React Router.

@@ -24,8 +24,8 @@ function Cart( {show, setShow} ) {
         order_date: date,
         item_details: cartItems
     }
-        console.log(cartItems)
-        console.log(newOrder)
+
+    console.log(newOrder)
 
     fetch('/orders', {
         method: 'POST',
@@ -36,8 +36,13 @@ function Cart( {show, setShow} ) {
     })
     .then(r => r.json())
     .then(newOrd => {
+      if (userOrders){
       setUserOrders([...userOrders, newOrd])
       navigate('/myorders')
+      } else {
+        setUserOrders(newOrd)
+        navigate('/myorders')
+      }
     })
 
   }

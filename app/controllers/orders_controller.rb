@@ -4,17 +4,18 @@ class OrdersController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
 
-    def index
-        orders = Order.all
-        if orders
-        render json: orders
-        else
-            render json: {error: "Order Not Found" }, status: :not_found
-        end
-    end
+    # def index
+    #     orders = Order.all
+    #     if orders
+    #     render json: orders
+    #     else
+    #         render json: {error: "Order Not Found" }, status: :not_found
+    #     end
+    # end
 
     def show
-        order = Order.find_by(id: params[:id])
+        customer = Customer.find(sessions[:customer_id])
+        order = customer.orders.find_by(id: params[:id])
         if order
             render json: order
         else
@@ -23,23 +24,42 @@ class OrdersController < ApplicationController
     end
 
     def create
-        order = Order.create!(order_params)
-            order.item_details.each do |item_attribs|
-                order.order_details.create(item_attribs)
-            end
+        customer = Customer.find(sessions[:customer_id])
+        if customer
+            order = Order.create!(order_params)
+                order.item_details.each do |item_attribs|
+                    order.order_details.create(item_attribs)
+                end
             render json: order
+        end
     end
 
     def update
-        order = Order.find_by(id: params[:id])
+        customer = Customer.find(sessions[:customer_id])
+        order = customer.orders.find_by(id: params[:id])
             order.update!(order_params)
             render json: order
     end
 
     def destroy
-        order = Order.find_by(id: params[:id])
+        customer = Customer.find(sessions[:customer_id])
+        order = customer.orders.find_by(id: params[:id])
             order.destroy!
             head :no_content
+    end
+    
+    def big
+        customer = Customer.find(session[:customer_id])
+        all_orders = customer.orders
+        big_orders = all_orders.select do |order|
+                quantities= []
+                order.order_details.each do |detail| [
+                
+                end
+            quantities.sum == (params[:number])
+        end
+        render json: big_orders
+
     end
 
 

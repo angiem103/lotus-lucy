@@ -15,7 +15,7 @@ export const InfoContext = createContext();
 function App() {
 
   const [currentUser, setCurrentUser] = useState();
-  const [userOrders, setUserOrders] = useState()
+  const [userOrders, setUserOrders] = useState([])
   const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   

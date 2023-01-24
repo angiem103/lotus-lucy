@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { InfoContext } from "./App";
 
-function CartItems( { item }) {
+function CartItems( { item } ) {
 
     const {products} = useContext(InfoContext);
 
