@@ -1,5 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Card from 'react-bootstrap/Card';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
@@ -15,6 +17,7 @@ function ProductCard( {product, cartItems, setCartItems} ) {
   }
  
     const [isLoading, setLoading] = useState(false);
+    const [qty, setQty] = useState();
   
     useEffect(() => {
       if (isLoading) {
@@ -28,7 +31,7 @@ function ProductCard( {product, cartItems, setCartItems} ) {
       if (currentUser) {
       const item = {
         product_id: product.id,
-        quantity: 1
+        quantity: qty
       }
       setCartItems([...cartItems, item])
       setLoading(true)
@@ -38,18 +41,24 @@ function ProductCard( {product, cartItems, setCartItems} ) {
 
     return (
         <Col>
-        <Card style={{ width: '22rem', height: '35rem',fontFamily: 'andale mono, monospace' }} bg='dark' text='light'>
+        <Card style={{ width: '22rem', height: '40rem',fontFamily: 'andale mono, monospace' }} bg='dark' text='light'>
         <Card.Img style={{ height: '27rem', objectFit: 'cover', alignContent: 'center' }}variant="top" src={product.img} />
         <Card.Body>
           <Card.Title>{product.name}</Card.Title>
           <Card.Text>
-            ${product.price}
+            Price: ${product.price}
           </Card.Text>
           { !currentUser ?
           <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">You Must Login To Order</Tooltip>}>
             <Button onClick={addToCart} variant='dark'>Add To Cart</Button>
             </OverlayTrigger> :
-          <Button onClick={!isLoading? addToCart : null} variant='dark'>{isLoading ? 'Added' : 'Add To Cart'}</Button>
+            <div>
+              <InputGroup className="mb-3"  style={{paddingRight: '200px'}}>
+                <InputGroup.Text>Qty</InputGroup.Text>
+                <Form.Control type="email"  onChange={(e) => setQty(e.target.value)}/>
+              </InputGroup >
+              <Button onClick={!isLoading? addToCart : null} variant='dark'>{isLoading ? 'Added' : 'Add To Cart'}</Button>
+          </div>
           }
         </Card.Body>
       </Card>

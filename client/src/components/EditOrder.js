@@ -73,7 +73,7 @@ function EditOrder () {
             <h1 style={headerStyle}>CHANGE ORDER</h1>
             <Form style={formStyle} onSubmit={handleSubmit}>
             {renderDetails}
-            <Button variant="dark" type="submit" onSubmite={handleSubmit}>
+            <Button variant="dark" type="submit" onSubmit={handleSubmit}>
                 Update Cart
              </Button>
              <br></br>

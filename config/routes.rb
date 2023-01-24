@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   get "/big_orders/:number", to:"orders#big"
 
   resources :customers, only: [:show, :create]
-  resources :orders, only: [:show, :create, :update, :destroy]
-  resources :order_details, only: [:create, :update]
+  resources :orders, only: [:index, :show, :create, :update, :destroy]
+  resources :order_details, only: [:index, :create, :update]
   resources :products
 
   # Routing logic: fallback requests for React Router.

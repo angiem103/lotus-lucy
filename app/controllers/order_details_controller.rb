@@ -1,15 +1,15 @@
 class OrderDetailsController < ApplicationController
 
-    # skip_before_action :authorized, only: :create
+    skip_before_action :authorized, only: :create
 
-    # def index
-    #     order_details = OrderDetail.all
-    #     if order_details
-    #     render json: order_details
-    #     else
-    #         render json: {error: "Not Found"}, status: :not_found
-    #     end
-    # end
+    def index
+        order_details = OrderDetail.all
+        if order_details
+        render json: order_details
+        else
+            render json: {error: "Not Found"}, status: :not_found
+        end
+    end
 
     def create
         order_detail = OrderDetail.create(order_details_params)
