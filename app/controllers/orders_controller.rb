@@ -39,7 +39,7 @@ class OrdersController < ApplicationController
     end
 
     def destroy
-        customer = Customer.find(sessions[:customer_id])
+        customer = Customer.find(session[:customer_id])
         order = customer.orders.find_by(id: params[:id])
             order.destroy!
             head :no_content
@@ -49,11 +49,11 @@ class OrdersController < ApplicationController
     #     customer = Customer.find(session[:customer_id])
     #     all_orders = customer.orders
     #     big_orders = all_orders.select do |order|
-    #             quantities= []
-    #             order.order_details.each do |detail| [
-                
+    #             arr = []
+    #             order.order_details.select do |details|
+    #                 arr << details.quantity
     #             end
-    #         quantities.sum == (params[:number])
+    #             arr.sum == (params)
     #     end
     #     render json: big_orders
 

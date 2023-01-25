@@ -19,13 +19,13 @@ function Cart( {show, setShow} ) {
     const today = new Date()
     const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 
+    console.log(currentUser.id)
+
     const newOrder = {
         customer_id: currentUser.id,
         order_date: date,
         item_details: cartItems
     }
-
-    console.log(newOrder)
 
     fetch('/orders', {
         method: 'POST',
@@ -37,16 +37,17 @@ function Cart( {show, setShow} ) {
     .then(r => r.json())
     .then(newOrd => {
       if (userOrders){
-      setUserOrders([...userOrders, newOrd])
-      navigate('/myorders')
+        setUserOrders([...userOrders, newOrd])
+        navigate('/myorders')
+        setCartItems([])
       } else {
         setUserOrders(newOrd)
         navigate('/myorders')
+        setCartItems([])
       }
     })
 
   }
-
 
   const renderCartItems = cartItems.map((item) => <CartItems item={item}/>)
   const cartCosts = cartItems.map((item) => {

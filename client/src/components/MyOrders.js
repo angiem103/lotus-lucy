@@ -26,12 +26,14 @@ function MyOrders() {
     })
 
     function deleteOrder(deletedOrder) {
-        const filteredOrders = [...userOrders].filter(order => order.id !== deletedOrder.id )
-        setUserOrders(filteredOrders)  
+        const filteredOrders = userOrders.filter(order => order.id !== deletedOrder.id )
+        setUserOrders([...filteredOrders])  
     };
 
     
     const renderOrders = userOrders ? userOrders.map(order => <PastOrderCard key={order.total_cost} order={order} onOrderDelete={deleteOrder}/>) : undefined
+
+
 
     return isLoading ? <Loader/> : (
         <div>
