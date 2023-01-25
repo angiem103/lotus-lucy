@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   delete "/logout", to: "sessions#destroy"
   get "/auth", to: "customers#show"
 
-  get "/big_orders/:number", to:"orders#big"
 
   resources :customers, only: [:show, :create, :index]
   resources :orders, only: [:index, :show, :create, :update, :destroy]

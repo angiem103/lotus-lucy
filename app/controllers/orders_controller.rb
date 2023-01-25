@@ -45,20 +45,6 @@ class OrdersController < ApplicationController
             head :no_content
     end
     
-    # def big
-    #     customer = Customer.find(session[:customer_id])
-    #     all_orders = customer.orders
-    #     big_orders = all_orders.select do |order|
-    #             arr = []
-    #             order.order_details.select do |details|
-    #                 arr << details.quantity
-    #             end
-    #             arr.sum == (params)
-    #     end
-    #     render json: big_orders
-
-    # end
-
 
     private
 
